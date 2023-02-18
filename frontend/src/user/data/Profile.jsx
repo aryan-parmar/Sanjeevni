@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useRef} from "react";
 import { Theme } from "../../components/Theme";
 import {
   Typography,
@@ -9,46 +9,47 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from "react-router-dom";
 
 const forms = [
   {
-    title: "Personal Details",
+    title: "personal profile",
     route: "personal",
     complete: false,
   },
   {
-    title: "Allergies",
+    title: "allergies profile",
     route: "allergies",
     complete: false,
   },
   {
-    title: "Chronic Illnesses",
+    title: "illnesses profile",
     route: "illnesses",
     complete: false,
   },
   {
-    title: "Family History",
+    title: "history profile",
     route: "history",
     complete: false,
   },
   {
-    title: "Vaccination Records",
+    title: "vaccination profile",
     route: "vaccination",
     complete: false,
   },
   {
-    title: "Previous Surgeries",
+    title: "surgeries profile",
     route: "surgeries",
     complete: false,
   },
   {
-    title: "Insurance Details",
+    title: "insurance profile",
     route: "insurance",
     complete: false,
   },
   {
-    title: "Emergency Contacts",
+    title: "emergency profile",
     route: "emergency",
     complete: false,
   },
@@ -56,6 +57,10 @@ const forms = [
 
 const Card = (props) => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  useEffect(()=>{
+    i18n.changeLanguage('en')
+  },[])
   return (
     <>
       <Paper
@@ -84,7 +89,7 @@ const Card = (props) => {
               fontFamily: "Poppins, sans-serif",
             }}
           >
-            {props.title}
+            {t(props.title)}
           </Typography>
           <svg
             style={{
@@ -107,6 +112,10 @@ const Card = (props) => {
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  useEffect(()=>{
+    i18n.changeLanguage('en')
+  },[])
   return (
     <>
       <Theme>
@@ -121,7 +130,6 @@ const Profile = () => {
                 id="demo-simple-select-label"
                 sx={{
                   fontSize: 16,
-                  marginBottom: 10,
                 }}
               >
                 Lang
@@ -129,7 +137,8 @@ const Profile = () => {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                label="Blood Group"
+                label="Lang"
+                onChange={(e) => {i18n.changeLanguage(e.target.value);}}
                 sx={{
                   borderRadius: "15px",
 
@@ -139,8 +148,8 @@ const Profile = () => {
                   },
                 }}
               >
-                <MenuItem value={"Enlish"}>English</MenuItem>
-                <MenuItem value={"Hindi"}>Hindi</MenuItem>
+                <MenuItem value={"en"}>English</MenuItem>
+                <MenuItem value={"hi"}>Hindi</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -167,14 +176,14 @@ const Profile = () => {
               fontFamily: "Poppins, sans-serif",
             }}
           >
-            Complete Profile
+            {t("complete your profile")}
           </Typography>
           <p
             style={{
               textAlign: "center",
             }}
           >
-            Get Started by Completing your Profile
+            {t("get started profile")}
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-14 pb-14">
             {forms.map((data) => (
@@ -189,7 +198,7 @@ const Profile = () => {
               sx={{ mt: 5 }}
               onClick={() => navigate("/user/dashboard")}
             >
-              Complete
+              {t("complete profile")}
             </Button>
           </div>
         </div>
