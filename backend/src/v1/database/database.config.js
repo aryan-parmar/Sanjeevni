@@ -4,7 +4,7 @@ const MONGO_URI = process.env.MONGODB_URI;
 mongoose.set('strictQuery', false);
 exports.connect = () => {
   mongoose
-    .connect(MONGO_URI + "san", {
+    .connect(MONGO_URI + "sanjeevni", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })

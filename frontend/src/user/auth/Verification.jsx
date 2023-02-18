@@ -41,9 +41,9 @@ const Verification = () => {
   React.useEffect(() => {
     if (data) {
       if (!data.err) {
-        if(type === "verification"){
+        if (type === "verification") {
           navigate("/user/profile");
-        }else{
+        } else {
           navigate("/user/dashboard");
         }
       }

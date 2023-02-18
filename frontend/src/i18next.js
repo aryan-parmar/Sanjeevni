@@ -3,26 +3,46 @@ import { initReactI18next } from "react-i18next";
 const resources = {
   en: {
     translation: {
-      "welcome": "Welcome Back",
-      "Login to your account": "Login to your account",
-      "Phone Number": "Phone Number",
-      "Password": "Password",
-      "Forgot Password": "Forgot Password",
-      "Don't have an account": "Don't have an account",
-      "Login": "Login",
-      "Register": "Register"
+      "complete your profile": "Complete Profile",
+      "get started profile": "Get Started by Completing your Profile",
+      "personal profile": "Personal Details",
+      "allergies profile": "Allergies",
+      "illnesses profile": "Chronic Illnesses",
+      "history profile": "Family History",
+      "vaccination profile": "Vaccination Records",
+      "surgeries profile": "Previous Surgeries",
+      "insurance profile": "Insurance Details",
+      "emergency profile": "Emergency Contacts",
+      "complete profile": "Complete",
+
+      "namaste": "Namaste",
+      "namaste bharti": "I am Bharti, your Personal Chat Assistant",
+      "ask bharti": "Ask Bharti anything that will help you",
+      "ask doubt": "Ask Bharti",
+
+      "hi" : "Fill in your Personal Details",
     },
   },
   hi: {
     translation: {
-      "welcome": "स्वागत है",
-      "Login to your account": "अपने अकाउंट में लॉग इन करें",
-      "Phone Number": "फ़ोन नंबर",
-      "Password": "पासवर्ड",
-      "Forgot Password": "पासवर्ड भूल गए",
-      "Don't have an account": "खाता नहीं है",
-      "Login": "लॉग इन",
-        "Register": "साइन अप"
+      "complete your profile": "प्रोफ़ाइल पूरा करें",
+      "get started profile": "प्रोफ़ाइल पूरा करके शुरू करें",
+      "personal profile": "व्यक्तिगत विवरण",
+      "allergies profile": "एलर्जी",
+      "illnesses profile": "अस्थमा",
+      "history profile": "परिवार का इतिहास",
+      "vaccination profile": "टीकाकरण रिकॉर्ड",
+      "surgeries profile": "पिछले सर्जरी",
+      "insurance profile": "बीमा विवरण",
+      "emergency profile": "आपातकालीन संपर्क",
+      "complete profile": "पूरा करें",
+
+      "namaste": "नमस्ते",
+      "namaste bharti": "मैं भारती हूँ, आपका व्यक्तिगत चैट सहायक",
+      "ask bharti": "भारती से जो भी पूछें जो आपकी मदद करेगा",
+      "ask doubt": "भारती से पूछें",
+
+      "hi" : "अपने व्यक्तिगत विवरण भरें",
     },
   },
 };

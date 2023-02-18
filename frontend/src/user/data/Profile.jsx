@@ -1,45 +1,69 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Theme } from "../../components/Theme";
-import { Typography, Button, Paper } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  Fab,
+} from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import ChatIcon from "@mui/icons-material/Chat";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 
 const forms = [
   {
-    title: "Personal Details",
+    title: "personal profile",
     route: "personal",
+    complete: false,
   },
   {
-    title: "Allergies",
+    title: "allergies profile",
     route: "allergies",
+    complete: false,
   },
   {
-    title: "Chronic Illnesses",
+    title: "illnesses profile",
     route: "illnesses",
+    complete: false,
   },
   {
-    title: "Family History",
+    title: "history profile",
     route: "history",
+    complete: false,
   },
   {
-    title: "Vaccination Records",
+    title: "vaccination profile",
     route: "vaccination",
+    complete: false,
   },
   {
-    title: "Previous Surgeries",
+    title: "surgeries profile",
     route: "surgeries",
+    complete: false,
   },
   {
-    title: "Insurance Details",
+    title: "insurance profile",
     route: "insurance",
+    complete: false,
   },
   {
-    title: "Emergency Contacts",
+    title: "emergency profile",
     route: "emergency",
+    complete: false,
   },
 ];
 
 const Card = (props) => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
   return (
     <>
       <Paper
@@ -47,8 +71,9 @@ const Card = (props) => {
         sx={{
           width: "325px",
           height: "75px",
-          background:
-            "linear-gradient(91.47deg, rgba(72, 173, 247, 0.39) 0.58%, rgba(0, 97, 167, 0.39) 95.65%)",
+          background: !props.complete
+            ? "linear-gradient(91.47deg, rgba(72, 173, 247, 0.39) 0.58%, rgba(0, 97, 167, 0.39) 95.65%)"
+            : "linear-gradient(91.47deg, rgba(50, 253, 70, 0.5) 0.58%, rgba(17, 174, 3, 0.5) 95.65%)",
           border: "2px solid #0465AB",
           borderRadius: "13px",
         }}
@@ -67,7 +92,7 @@ const Card = (props) => {
               fontFamily: "Poppins, sans-serif",
             }}
           >
-            {props.title}
+            {t(props.title)}
           </Typography>
           <svg
             style={{
@@ -90,10 +115,54 @@ const Card = (props) => {
 
 const Profile = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
+  const speakHindi = () => {
+    const utterance = new SpeechSynthesisUtterance("प्रोफ़ाइल पूरा करके शुरू करें");
+    utterance.lang = "hi-IN";
+    speechSynthesis.speak(utterance);
+  };
   return (
     <>
       <Theme>
         <div>
+          <div className="absolute top-0 right-0 m-5">
+            <FormControl
+              sx={{
+                width: "150px",
+              }}
+            >
+              <InputLabel
+                id="demo-simple-select-label"
+                sx={{
+                  fontSize: 16,
+                }}
+              >
+                Lang
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Lang"
+                onChange={(e) => {
+                  i18n.changeLanguage(e.target.value);
+                }}
+                sx={{
+                  borderRadius: "15px",
+
+                  "& fieldset": {
+                    height: "50px",
+                    border: "2px solid gray",
+                  },
+                }}
+              >
+                <MenuItem value={"en"}>English</MenuItem>
+                <MenuItem value={"hi"}>Hindi</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <svg
             className="w-7 absolute inset-0 mt-5 ml-5"
             fill="#0061af"
@@ -112,30 +181,70 @@ const Profile = () => {
               fontWeight: "900",
               color: "#000",
               textAlign: "center",
-              pt: { mobile: 11, tablet: 5, laptop: 5 },
-              mb: 1,
+              pt: { mobile: 15, tablet: 5, laptop: 5 },
               fontFamily: "Poppins, sans-serif",
             }}
           >
-            Complete Profile
+            {t("complete your profile")}
           </Typography>
           <p
             style={{
               textAlign: "center",
             }}
           >
-            Get Started by Completing your Profile
+            {t("get started profile")}
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-14 pb-14">
+          <div className="w-[100vw] flex justify-center mt-5">
+            <Fab
+              sx={{
+                margin: 1,
+                background:
+                  "linear-gradient(91.47deg, #48ADF7 0.58%, #0061A7 95.65%)",
+                width: "60px",
+                height: "60px",
+              }}
+            >
+              <RecordVoiceOverIcon
+                onClick={speakHindi}
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.75rem",
+                }}
+              />
+            </Fab>
+            <Fab
+              sx={{
+                margin: 1,
+                background:
+                  "linear-gradient(91.47deg, #48ADF7 0.58%, #0061A7 95.65%)",
+                width: "60px",
+                height: "60px",
+              }}
+              onClick={() => navigate("/user/chatbot")}
+            >
+              <ChatIcon
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.75rem",
+                }}
+              />
+            </Fab>
+          </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10 pb-10">
             {forms.map((data) => (
-              <Card title={data.title} route={data.route} />
+              <Card
+                key={data.route}
+                title={data.title}
+                route={data.route}
+                complete={data.complete}
+              />
             ))}
             <Button
               variant="contained"
               sx={{ mt: 5 }}
               onClick={() => navigate("/user/dashboard")}
             >
-              Complete   
+              {t("complete profile")}
             </Button>
           </div>
         </div>

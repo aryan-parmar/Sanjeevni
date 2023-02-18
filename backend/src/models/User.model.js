@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   Aadhar: { type: Number, unique: true },
   CreatedAt: { type: Date, default: Date.now },
   Role: { type: String, default: "user" },
+  FormId: { type: String},
 });
 
 module.exports = mongoose.model("user", userSchema);

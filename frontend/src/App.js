@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Home";
+import ChatBot from "./components/ChatBot";
 import {
   User,
   UserLogin,
@@ -82,6 +83,10 @@ function App() {
     {
       path: "/user/verification/:phone/:type",
       element: <UserVerification />,
+    },
+    {
+      path: "/user/chatbot",
+      element: <ChatBot />,
     },
     {
       path: "/user/profile",
