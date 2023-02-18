@@ -1,12 +1,12 @@
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker/locale/en_IND';
 import { sample } from 'lodash';
 
 // ----------------------------------------------------------------------
 
 const users = [...Array(24)].map((_, index) => ({
   id: faker.datatype.uuid(),
-  avatarUrl: `/assets/images/avatars/avatar_${index + 1}.jpg`,
-  name: faker.name.fullName(),
+  avatarUrl: faker.image.avatar(),
+  name: faker.name.firstName(),
   company: faker.company.name(),
   isVerified: faker.datatype.boolean(),
   status: sample(['active', 'banned']),
