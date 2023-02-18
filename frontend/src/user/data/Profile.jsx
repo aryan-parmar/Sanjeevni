@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import { Theme } from "../../components/Theme";
 import {
   Typography,
@@ -8,9 +8,12 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  Fab,
 } from "@mui/material";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import ChatIcon from "@mui/icons-material/Chat";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 
 const forms = [
   {
@@ -58,9 +61,9 @@ const forms = [
 const Card = (props) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  useEffect(()=>{
-    i18n.changeLanguage('en')
-  },[])
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
   return (
     <>
       <Paper
@@ -113,14 +116,19 @@ const Card = (props) => {
 const Profile = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  useEffect(()=>{
-    i18n.changeLanguage('en')
-  },[])
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
+  const speakHindi = () => {
+    const utterance = new SpeechSynthesisUtterance("प्रोफ़ाइल पूरा करके शुरू करें");
+    utterance.lang = "hi-IN";
+    speechSynthesis.speak(utterance);
+  };
   return (
     <>
       <Theme>
         <div>
-          <div className="absolute top-0 right-0 m-5 ">
+          <div className="absolute top-0 right-0 m-5">
             <FormControl
               sx={{
                 width: "150px",
@@ -138,7 +146,9 @@ const Profile = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Lang"
-                onChange={(e) => {i18n.changeLanguage(e.target.value);}}
+                onChange={(e) => {
+                  i18n.changeLanguage(e.target.value);
+                }}
                 sx={{
                   borderRadius: "15px",
 
@@ -172,7 +182,6 @@ const Profile = () => {
               color: "#000",
               textAlign: "center",
               pt: { mobile: 15, tablet: 5, laptop: 5 },
-              mb: 1,
               fontFamily: "Poppins, sans-serif",
             }}
           >
@@ -185,9 +194,46 @@ const Profile = () => {
           >
             {t("get started profile")}
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-14 pb-14">
+          <div className="w-[100vw] flex justify-center mt-5">
+            <Fab
+              sx={{
+                margin: 1,
+                background:
+                  "linear-gradient(91.47deg, #48ADF7 0.58%, #0061A7 95.65%)",
+                width: "60px",
+                height: "60px",
+              }}
+            >
+              <RecordVoiceOverIcon
+                onClick={speakHindi}
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.75rem",
+                }}
+              />
+            </Fab>
+            <Fab
+              sx={{
+                margin: 1,
+                background:
+                  "linear-gradient(91.47deg, #48ADF7 0.58%, #0061A7 95.65%)",
+                width: "60px",
+                height: "60px",
+              }}
+              onClick={() => navigate("/user/chatbot")}
+            >
+              <ChatIcon
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.75rem",
+                }}
+              />
+            </Fab>
+          </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-10 pb-10">
             {forms.map((data) => (
               <Card
+                key={data.route}
                 title={data.title}
                 route={data.route}
                 complete={data.complete}

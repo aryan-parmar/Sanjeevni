@@ -19,7 +19,7 @@ const Personal = () => {
   return (
     <>
       <Theme>
-        <div className="">
+        <div>
           <svg
             className="w-7 absolute inset-0 mt-5 ml-5"
             fill="#0061af"
