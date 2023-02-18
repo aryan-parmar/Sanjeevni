@@ -25,9 +25,8 @@ const Featured = () => {
         height={200}
         src="https://www.youtube.com/embed/Drpe91VvMXk"
         title="YouTube video player"
-        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
       <iframe
         className="mx-auto mb-14 rounded-lg"
@@ -35,9 +34,8 @@ const Featured = () => {
         height={200}
         src="https://www.youtube.com/embed/jp0yCBzaMSc"
         title="YouTube video player"
-        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
     </>
   );
@@ -105,7 +103,7 @@ const Dashboard = () => {
         <div className="min-h-[100vh]">
           <div className="flex justify-between">
             <TemporaryDrawer />
-            <div classname="flex justify-around">
+            <div className="flex justify-around">
               <RecordVoiceOverIcon
                 sx={{
                   fontSize: "2rem",
@@ -177,6 +175,7 @@ const Dashboard = () => {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Lang"
+                  defaultValue={'en'}
                   onChange={(e) => {
                     i18n.changeLanguage(e.target.value);
                   }}

@@ -31,7 +31,7 @@ export default function Router() {
     {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/dashboard/home" />, index: true },
+        { element: <Navigate to="/ministry/login" />, index: true },
       ],
     },
     ]);
