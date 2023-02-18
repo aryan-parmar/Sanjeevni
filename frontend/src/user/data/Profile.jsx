@@ -7,34 +7,42 @@ const forms = [
   {
     title: "Personal Details",
     route: "personal",
+    complete: false,
   },
   {
     title: "Allergies",
     route: "allergies",
+    complete: false,
   },
   {
     title: "Chronic Illnesses",
     route: "illnesses",
+    complete: false,
   },
   {
     title: "Family History",
     route: "history",
+    complete: false,
   },
   {
     title: "Vaccination Records",
     route: "vaccination",
+    complete: false,
   },
   {
     title: "Previous Surgeries",
     route: "surgeries",
+    complete: false,
   },
   {
     title: "Insurance Details",
     route: "insurance",
+    complete: false,
   },
   {
     title: "Emergency Contacts",
     route: "emergency",
+    complete: false,
   },
 ];
 
@@ -47,8 +55,9 @@ const Card = (props) => {
         sx={{
           width: "325px",
           height: "75px",
-          background:
-            "linear-gradient(91.47deg, rgba(72, 173, 247, 0.39) 0.58%, rgba(0, 97, 167, 0.39) 95.65%)",
+          background: !props.complete
+            ? "linear-gradient(91.47deg, rgba(72, 173, 247, 0.39) 0.58%, rgba(0, 97, 167, 0.39) 95.65%)"
+            : "linear-gradient(91.47deg, rgba(50, 253, 70, 0.5) 0.58%, rgba(17, 174, 3, 0.5) 95.65%)",
           border: "2px solid #0465AB",
           borderRadius: "13px",
         }}
@@ -128,14 +137,18 @@ const Profile = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mt-14 pb-14">
             {forms.map((data) => (
-              <Card title={data.title} route={data.route} />
+              <Card
+                title={data.title}
+                route={data.route}
+                complete={data.complete}
+              />
             ))}
             <Button
               variant="contained"
               sx={{ mt: 5 }}
               onClick={() => navigate("/user/dashboard")}
             >
-              Complete   
+              Complete
             </Button>
           </div>
         </div>

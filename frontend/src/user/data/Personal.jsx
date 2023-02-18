@@ -9,11 +9,13 @@ import {
   Select,
   FormControl,
   InputLabel,
-  MenuItem
+  MenuItem,
+  Button,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Personal = () => {
+  const navigate = useNavigate();
   return (
     <>
       <Theme>
@@ -50,7 +52,7 @@ const Personal = () => {
           >
             Get Started by Completing your Profile
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 mt-14 pb-14">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 mt-14 pb-32">
             <TextField label="Full Name&nbsp;&nbsp;" variant="outlined" />
             <TextField
               label="Age&nbsp;&nbsp;"
@@ -64,6 +66,7 @@ const Personal = () => {
               sx={{
                 gap: "0px 20px",
                 marginTop: "20px",
+                justifyContent: "center",
               }}
             >
               <FormControlLabel
@@ -79,21 +82,121 @@ const Personal = () => {
               />
             </RadioGroup>
             <TextField label="Adress&nbsp;&nbsp;" variant="outlined" />
-            <FormControl sx={{
-              width: "325px",
-              mt: 2,
-            }}>
-              <InputLabel id="demo-simple-select-label">Blood Group</InputLabel>
+            <FormControl
+              sx={{
+                width: "325px",
+                mt: 2,
+              }}
+            >
+              <InputLabel
+                id="demo-simple-select-label"
+                sx={{
+                  fontSize: 18,
+                }}
+              >
+                Blood Group
+              </InputLabel>
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Blood Group"
+                sx={{
+                  borderRadius: "15px",
+                  "& fieldset": {
+                    border: "2px solid gray",
+                  },
+                }}
               >
-                <MenuItem value={10}>Ten</MenuItem>
-                <MenuItem value={20}>Twenty</MenuItem>
-                <MenuItem value={30}>Thirty</MenuItem>
+                <MenuItem value={"A"}>A</MenuItem>
+                <MenuItem value={"B"}>B</MenuItem>
+                <MenuItem value={"C"}>C</MenuItem>
+                <MenuItem value={"AB"}>AB</MenuItem>
+                <MenuItem value={"O"}>O</MenuItem>
               </Select>
             </FormControl>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              sx={{
+                gap: "0px 20px",
+                marginTop: "20px",
+                justifyContent: "center",
+              }}
+            >
+              <FormControlLabel value="Veg" control={<Radio />} label="Veg" />
+              <FormControlLabel
+                value="Non-Veg"
+                control={<Radio />}
+                label="Non-Veg"
+              />
+              <FormControlLabel
+                value="Vegan"
+                control={<Radio />}
+                label="Vegan"
+              />
+            </RadioGroup>
+            <TextField
+              label="Height&nbsp;&nbsp;"
+              variant="outlined"
+              placeholder="in CentiMeters"
+            />
+            <TextField
+              label="Weight&nbsp;&nbsp;"
+              variant="outlined"
+              placeholder="in Kilograms"
+            />
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              sx={{
+                gap: "0px 20px",
+                marginTop: "20px",
+                width: "325px",
+                justifyContent: "center",
+              }}
+            >
+              <FormControlLabel
+                value="Smoker"
+                control={<Radio />}
+                label="Smoker"
+              />
+              <FormControlLabel
+                value="Non-Smoker"
+                control={<Radio />}
+                label="Non-Smoker"
+              />
+            </RadioGroup>
+            <RadioGroup
+              row
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              sx={{
+                gap: "0px 20px",
+                marginTop: "0px",
+                width: "325px",
+                justifyContent: "center",
+              }}
+            >
+              <FormControlLabel
+                value="Alcoholic"
+                control={<Radio />}
+                label="Alcoholic"
+              />
+              <FormControlLabel
+                value="Non-Alcoholic"
+                control={<Radio />}
+                label="Non-Alcoholic"
+              />
+            </RadioGroup>
+            <Button
+              variant="contained"
+              sx={{ mt: 5 }}
+              onClick={() => navigate("/user/dashboard")}
+            >
+              Continue
+            </Button>
           </div>
         </div>
       </Theme>

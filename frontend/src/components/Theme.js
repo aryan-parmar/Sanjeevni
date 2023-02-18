@@ -57,33 +57,6 @@ const theme = createTheme({
         },
       },
     },
-    MuiSelect: {
-      styleOverrides: {
-        root: {
-          width: "325px",
-          borderRadius: "15px",
-          borderColor: "grey !important",
-          borderWidth: "2 !important",
-          borderRadius: "15px !important",
-          "& .MuiOutlinedInput-root": {
-            padding: "0px 10px",
-            "& .fieldset": {
-
-            },
-            "&.Mui-focused fieldset": {
-              borderColor: "#0061A7",
-            },
-          },
-          "& .MuiInputBase-input": {
-            fontSize: 18,
-            color: "black",
-          },
-          "& .MuiInputLabel-root": {
-            fontSize: 18,
-          },
-        },
-      },
-    },
   },
 });
 
