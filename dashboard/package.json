@@ -80,5 +80,4 @@
   "overrides": {
     "@svgr/webpack": "^6.5.0"
   }
-  
 }
