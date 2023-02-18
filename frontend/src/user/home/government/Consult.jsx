@@ -121,7 +121,7 @@ const Consult = () => {
             </FormControl>
           </div>
           <div className="w-[90vw] h-[75vh] mt-[15vh] ml-auto mr-auto shadow-2xl bg-white rounded-3xl overflow-hidden flex flex-col justify-between border-2 border-[#004C77]">
-            <div className="h-[20vh] bg-orange-300 border-b-2 border-[#004C77]">
+            <div className="h-[20vh] bg-[#25d5ce75] border-b-2 border-[#004C77]">
               <Typography
                 variant="h4"
                 component="h2"
@@ -149,7 +149,7 @@ const Consult = () => {
               </p>
             </div>
             <div className="flex flex-col justify-start h-full overflow-auto">
-              <BotMessage msg={t("namaste bharti")} />
+              <BotMessage msg="I am your Personal Medical Consultant" />
               {messages.map((message, index) => {
                 if (message.type === "user") {
                   return <UserMessage msg={message.msg} key={index}/>;
@@ -158,7 +158,7 @@ const Consult = () => {
                 }
               })}
             </div>
-            <div className="flex justify-center border-t-2 border-[#004C77] bg-orange-300">
+            <div className="flex justify-center border-t-2 border-[#004C77] bg-[#25d5ce75]">
               <TextField
                 label={t("ask doubt")}
                 variant="outlined"
@@ -170,21 +170,21 @@ const Consult = () => {
                 sx={{
                   mb: 4,
                   "& fieldset": {
-                    borderColor: "#cfcfcf !important",
+                    borderColor: "#000 !important",
                     borderWidth: 2,
                     borderRadius: "15px !important",
                   },
                   "&.Mui-focused .MuiInputLabel-root": {
                     fontSize: 18,
-                    color: "#cfcfcf !important",
+                    color: "#000 !important",
                   },
                   "& .MuiInputLabel-root": {
                     fontSize: 18,
-                    color: "#cfcfcf !important",
+                    color: "#000 !important",
                   },
                   "& .MuiInputBase-input": {
                     fontSize: 18,
-                    color: "#cfcfcf !important",
+                    color: "#000 !important",
                   },
                 }}
                 InputProps={{
@@ -197,7 +197,7 @@ const Consult = () => {
                       >
                         <SendIcon
                           style={{
-                            color: "#cfcfcf",
+                            color: "#000",
                           }}
                         />
                       </IconButton>
