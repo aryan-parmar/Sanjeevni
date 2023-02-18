@@ -104,7 +104,7 @@ const Dashboard = () => {
         <div className="min-h-[100vh]">
           <div className="flex justify-between">
             <TemporaryDrawer />
-            <div className="flex justify-around">
+            <div className="flex justify-around"> 
               <RecordVoiceOverIcon
                 sx={{
                   fontSize: "2rem",
