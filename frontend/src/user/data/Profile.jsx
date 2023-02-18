@@ -1,6 +1,14 @@
 import React from "react";
 import { Theme } from "../../components/Theme";
-import { Typography, Button, Paper } from "@mui/material";
+import {
+  Typography,
+  Button,
+  Paper,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const forms = [
@@ -103,6 +111,39 @@ const Profile = () => {
     <>
       <Theme>
         <div>
+          <div className="absolute top-0 right-0 m-5 ">
+            <FormControl
+              sx={{
+                width: "150px",
+              }}
+            >
+              <InputLabel
+                id="demo-simple-select-label"
+                sx={{
+                  fontSize: 16,
+                  marginBottom: 10,
+                }}
+              >
+                Lang
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Blood Group"
+                sx={{
+                  borderRadius: "15px",
+
+                  "& fieldset": {
+                    height: "45px",
+                    border: "2px solid gray",
+                  },
+                }}
+              >
+                <MenuItem value={"Enlish"}>English</MenuItem>
+                <MenuItem value={"Hindi"}>Hindi</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <svg
             className="w-7 absolute inset-0 mt-5 ml-5"
             fill="#0061af"
@@ -121,7 +162,7 @@ const Profile = () => {
               fontWeight: "900",
               color: "#000",
               textAlign: "center",
-              pt: { mobile: 11, tablet: 5, laptop: 5 },
+              pt: { mobile: 15, tablet: 5, laptop: 5 },
               mb: 1,
               fontFamily: "Poppins, sans-serif",
             }}
