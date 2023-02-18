@@ -104,7 +104,7 @@ const Dashboard = () => {
         <div className="min-h-[100vh]">
           <div className="flex justify-between">
             <TemporaryDrawer />
-            <div className="flex justify-around">
+            <div className="flex justify-around"> 
               <RecordVoiceOverIcon
                 sx={{
                   fontSize: "2rem",
@@ -176,7 +176,7 @@ const Dashboard = () => {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Lang"
-                  defaultValue={'en'}
+                  defaultValue={"en"}
                   onChange={(e) => {
                     i18n.changeLanguage(e.target.value);
                   }}
@@ -213,9 +213,13 @@ const Dashboard = () => {
           />
           <Featured />
           <div className="mx-auto flex flex-col justify-center items-center mb-10">
-            <h1 style={{
-              fontSize: "1.1rem",
-            }}>More Information ...</h1>
+            <h1
+              style={{
+                fontSize: "1.1rem",
+              }}
+            >
+              More Information ...
+            </h1>
           </div>
         </div>
       </Theme>
