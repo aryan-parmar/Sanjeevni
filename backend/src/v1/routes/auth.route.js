@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const authCheck = require("../middleware/authCheck");
 const User = require("../../models/User.model");
+const Form = require("../../models/Form.model");
 
 const accountSid = "AC3115f74b66c8909ca220dd6c60a4a30f";
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -32,6 +33,8 @@ router.post("/signup", async (req, res, next) => {
       Phone: Phone,
       Password: encryptedPassword,
     });
+    const FormId = await Form.create({ userId: user._id });
+    user.FormId = FormId._id;
     const token = jwt.sign(
       { user_id: user._id, Phone },
       process.env.TOKEN_KEY,
@@ -70,6 +73,7 @@ router.post("/verify", async (req, res, next) => {
     .services(verifySid)
     .verificationChecks.create({ to: `+91${Phone}`, code: code })
     .then((verification_check) => {
+      console.log(verification_check.status);
       if (verification_check.status === "approved") {
         User.findOneAndUpdate(
           { Phone: Phone },

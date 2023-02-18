@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cookieParser())
 app.use(express.static('public',{maxAge: 3600000}));
 app.use(function(req, res, next) {
-  res.setHeader('x-powered-by', 'Ary1.0')
+  res.setHeader('x-powered-by', 'sanjeevni@1.1')
   next();
 });
 app.use(cors({
