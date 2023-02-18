@@ -7,6 +7,7 @@ import BlogPage from './pages/BlogPage';
 import UserPage from './pages/UserPage';
 import ProductsPage from './pages/ProductsPage';
 import DashboardAppPage from './pages/DashboardAppPage';
+import Login from './pages/Login';
 
 // ----------------------------------------------------------------------
 
@@ -16,17 +17,21 @@ export default function Router() {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
-        { path: 'app', element: <DashboardAppPage /> },
+        { element: <Navigate to="/ministry/home" />, index: true },
+        { path: 'home', element: <DashboardAppPage /> },
         { path: 'user', element: <UserPage /> },
         { path: 'products', element: <ProductsPage /> },
         { path: 'blog', element: <BlogPage /> },
       ],
     },
     {
+      path: '/ministry/login',
+      element: <Login />,
+    },
+    {
       element: <SimpleLayout />,
       children: [
-        { element: <Navigate to="/dashboard/app" />, index: true },
+        { element: <Navigate to="/dashboard/home" />, index: true },
       ],
     },
     ]);
