@@ -30,6 +30,7 @@ import {
   UserPrograms,
   UserSchemes,
   UserSubsidies,
+  UserAccount,
 } from "./user/exports";
 import {
   Help,
@@ -121,6 +122,10 @@ function App() {
     {
       path: "/user/dashboard",
       element: <UserDashboard />,
+    },
+    {
+      path: "/user/account",
+      element: <UserAccount />,
     },
     {
       path: "/user/dashboard/data",

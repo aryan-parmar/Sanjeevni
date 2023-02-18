@@ -135,7 +135,7 @@ const Dashboard = () => {
               color="primary.contrastText"
               sx={{
                 fontSize: "2rem",
-                fontWeight: "700",
+                fontWeight: "600",
                 color: "#000",
                 textAlign: "center",
                 pt: { mobile: 15, tablet: 5, laptop: 5 },

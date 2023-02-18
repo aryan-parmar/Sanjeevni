@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: 'http://192.168.191.242:3000',
     credentials: true
 }))
 app.get('/', (req, res) => {
@@ -30,8 +30,7 @@ app.use('/api/auth/', auth);
 app.use('/api/update/', update);
 app.use('/api/get/', get);
 app.use('/api/chat/', chat);
-// app.use('/api/profile/', profile);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Example app listening at http://192.168.191.242:${port}`);
 });

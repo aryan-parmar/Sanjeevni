@@ -13,6 +13,7 @@ import Surgeries from "./data/Surgeries";
 import Insurance from "./data/Insurance";
 import Emergency from "./data/Emergency";
 
+import Account from "./home/Account";
 import Dashboard from "./home/Dashboard";
 import Data from "./home/Data";
 import Edit from "./home/Edit";
@@ -45,6 +46,7 @@ export const UserSurgeries = Surgeries;
 export const UserInsurance = Insurance;
 export const UserEmergency = Emergency;
 
+export const UserAccount = Account;
 export const UserDashboard = Dashboard;
 export const UserData = Data;
 export const UserEdit = Edit;
