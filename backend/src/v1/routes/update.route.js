@@ -21,7 +21,6 @@ router.post("/form", authCheck, async (req, res, next) => {
       let a = form.form || {};
       Object.assign(a, formFields);
       b["form"] = a;
-      console.log(a);
       Form.create(b);
       res.status(200).json({ err: null, message: "Form Updated" });
     } else {
