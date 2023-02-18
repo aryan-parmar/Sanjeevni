@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.51eb2edf.css",
+    "main.js": "/static/js/main.82e6c4e1.js",
+    "static/media/gov-login-bg.png": "/static/media/gov-login-bg.298f8209daa64dcc66e7.png",
+    "static/media/homeBG.png": "/static/media/homeBG.76689469e0de8402c88d.png",
+    "static/media/mainBG.png": "/static/media/mainBG.cfdd9f2e02d33a41acfd.png",
+    "static/media/sanjeevnicard.png": "/static/media/sanjeevnicard.732773c092a8f1a307b0.png",
+    "static/media/otpSVG.svg": "/static/media/otpSVG.21c8f92eeb4d8b08d1c8c2173efa0686.svg",
+    "static/media/healthcare.png": "/static/media/healthcare.1e8483c38e76f43c33ed.png",
+    "static/media/doctor.png": "/static/media/doctor.d1b8ec7abc3a7c9b110c.png",
+    "static/media/favicon.svg": "/static/media/favicon.62019f9b7becaf7257fc80d038fba87d.svg",
+    "index.html": "/index.html",
+    "main.51eb2edf.css.map": "/static/css/main.51eb2edf.css.map",
+    "main.82e6c4e1.js.map": "/static/js/main.82e6c4e1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.51eb2edf.css",
+    "static/js/main.82e6c4e1.js"
+  ]
+}
