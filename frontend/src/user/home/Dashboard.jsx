@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { Theme } from "../../components/Theme";
 import TemporaryDrawer from "../../components/Drawer";
+import SosDrawer from "../../components/SosDrawer";
 import ChatIcon from "@mui/icons-material/Chat";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import { useNavigate } from "react-router-dom";
@@ -194,6 +195,7 @@ const Dashboard = () => {
               </FormControl>
             </div>
           </div>
+          <SosDrawer />
           <Card
             image={Favicon}
             amount="22+ Crore"
