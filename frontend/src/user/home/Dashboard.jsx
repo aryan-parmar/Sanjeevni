@@ -4,6 +4,7 @@ import TemporaryDrawer from "../../components/Drawer";
 import SosDrawer from "../../components/SosDrawer";
 import ChatIcon from "@mui/icons-material/Chat";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import TranslateIcon from "@mui/icons-material/Translate";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -104,7 +105,17 @@ const Dashboard = () => {
         <div className="min-h-[100vh]">
           <div className="flex justify-between">
             <TemporaryDrawer />
-            <div className="flex justify-around"> 
+            <div className="flex justify-around">
+              <TranslateIcon
+                sx={{
+                  fontSize: "2rem",
+                  position: "absolute",
+                  top: "1.5rem",
+                  right: "8rem",
+                  cursor: "pointer",
+                }}
+                onClick={speakHindi}
+              />
               <RecordVoiceOverIcon
                 sx={{
                   fontSize: "2rem",
@@ -120,7 +131,7 @@ const Dashboard = () => {
                   fontSize: "2rem",
                   position: "absolute",
                   top: "1.5rem",
-                  right: "5rem",
+                  right: "4.5rem",
                   cursor: "pointer",
                 }}
                 onClick={() => navigate("/user/chatbot")}
@@ -158,42 +169,6 @@ const Dashboard = () => {
             >
               Welcome to <span>Sanjeevni</span>
             </p>
-            <div className="mt-10">
-              <FormControl
-                sx={{
-                  width: "175px",
-                }}
-              >
-                <InputLabel
-                  id="demo-simple-select-label"
-                  sx={{
-                    fontSize: 16,
-                  }}
-                >
-                  Lang
-                </InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  label="Lang"
-                  defaultValue={"en"}
-                  onChange={(e) => {
-                    i18n.changeLanguage(e.target.value);
-                  }}
-                  sx={{
-                    borderRadius: "15px",
-
-                    "& fieldset": {
-                      height: "55px",
-                      border: "2px solid gray",
-                    },
-                  }}
-                >
-                  <MenuItem value={"en"}>English</MenuItem>
-                  <MenuItem value={"hi"}>Hindi</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
           </div>
           <SosDrawer />
           <Card
