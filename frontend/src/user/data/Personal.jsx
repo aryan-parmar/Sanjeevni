@@ -238,7 +238,6 @@ const Personal = () => {
                 }}
                 defaultValue=""
               >
-                {/* <MenuItem defaultValue="">select</MenuItem> */}
                 <MenuItem value={"A+"}>A+</MenuItem>
                 <MenuItem value={"A-"}>A-</MenuItem>
                 <MenuItem value={"B+"}>B+</MenuItem>

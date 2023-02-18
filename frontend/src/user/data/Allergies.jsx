@@ -11,12 +11,27 @@ import {
   InputLabel,
   MenuItem,
   Button,
+  Fab,
 } from "@mui/material";
 import apiPost from "../../utilities/apiCall";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import ChatIcon from "@mui/icons-material/Chat";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 
 const Allergies = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  useEffect(() => {
+    i18n.changeLanguage("en");
+  }, []);
+  const speakHindi = () => {
+    const utterance = new SpeechSynthesisUtterance(
+      "कृपया अपनी एलर्जी निर्दिष्ट करें"
+    );
+    utterance.lang = "hi-IN";
+    speechSynthesis.speak(utterance);
+  };
   const [allergies, setAllergies] = React.useState("no");
   const [severity, setSeverity] = React.useState("no");
   const [eAR, setEAR] = React.useState();
@@ -51,7 +66,42 @@ const Allergies = () => {
   return (
     <>
       <Theme>
-        <div className="h-[100vh]">
+        <div className="min-h-[100vh]">
+          <div className="absolute top-0 right-0 m-5">
+            <FormControl
+              sx={{
+                width: "150px",
+              }}
+            >
+              <InputLabel
+                id="demo-simple-select-label"
+                sx={{
+                  fontSize: 16,
+                }}
+              >
+                Lang
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Lang"
+                onChange={(e) => {
+                  i18n.changeLanguage(e.target.value);
+                }}
+                sx={{
+                  borderRadius: "15px",
+
+                  "& fieldset": {
+                    height: "50px",
+                    border: "2px solid gray",
+                  },
+                }}
+              >
+                <MenuItem value={"en"}>English</MenuItem>
+                <MenuItem value={"hi"}>Hindi</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
           <svg
             className="w-7 absolute inset-0 mt-5 ml-5"
             fill="#0061af"
@@ -70,7 +120,7 @@ const Allergies = () => {
               fontWeight: "900",
               color: "#000",
               textAlign: "center",
-              pt: { mobile: 11, tablet: 5, laptop: 5 },
+              pt: { mobile: 15, tablet: 5, laptop: 5 },
               mb: 1,
               fontFamily: "Poppins, sans-serif",
             }}
@@ -82,151 +132,223 @@ const Allergies = () => {
               textAlign: "center",
             }}
           >
-            //Get Started by Completing your Profile
+            Please Specify your Allergies
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 mt-14 pb-32">
-            <label className="p-0 m-0 translate-y-5 font-bold">
-              Any allergies
-            </label>
-            <RadioGroup
-              row
-              aria-labelledby="demo-row-radio-buttons-group-label"
-              name="row-radio-buttons-group"
-              id="allergies"
-              onChange={(e) => {
-                setAllergies(e.target.value);
-              }}
+          <div className="w-[100vw] flex justify-center mt-5">
+            <Fab
               sx={{
-                gap: "0px 20px",
-                marginTop: "20px",
-                justifyContent: "center",
+                margin: 1,
+                background:
+                  "linear-gradient(91.47deg, #48ADF7 0.58%, #0061A7 95.65%)",
+                width: "60px",
+                height: "60px",
               }}
             >
-              <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-              <FormControlLabel value="no" control={<Radio />} label="No" />
-            </RadioGroup>
+              <RecordVoiceOverIcon
+                onClick={speakHindi}
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.75rem",
+                }}
+              />
+            </Fab>
+            <Fab
+              sx={{
+                margin: 1,
+                background:
+                  "linear-gradient(91.47deg, #48ADF7 0.58%, #0061A7 95.65%)",
+                width: "60px",
+                height: "60px",
+              }}
+              onClick={() => navigate("/user/chatbot")}
+            >
+              <ChatIcon
+                sx={{
+                  color: "#fff",
+                  fontSize: "1.75rem",
+                }}
+              />
+            </Fab>
+          </div>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 mt-10 pb-20">
+            <FormControl
+              sx={{
+                width: "325px",
+                mt: 2,
+              }}
+            >
+              <InputLabel
+                sx={{
+                  fontSize: 18,
+                }}
+                id="allergies"
+              >
+                Allergies
+              </InputLabel>
+              <Select
+                labelId="blood-group"
+                label="Allergies"
+                id="allergies"
+                onChange={(e) => {
+                  setAllergies(e.target.value);
+                }}
+                sx={{
+                  borderRadius: "15px",
+                  "& fieldset": {
+                    border: "2px solid gray",
+                  },
+                }}
+                defaultValue=""
+              >
+                <MenuItem value={"yes"}>Yes</MenuItem>
+                <MenuItem value={"no"}>No</MenuItem>
+                <MenuItem value={"unsure"}>Unsure</MenuItem>
+              </Select>
+            </FormControl>
             {allergies === "yes" ? (
               <>
-                <label className="p-0 m-0 translate-y-5 font-bold">
-                  Severity
-                </label>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  id="allergies"
-                  onChange={(e) => {
-                    setSeverity(e.target.value);
-                  }}
+                <FormControl
                   sx={{
-                    gap: "0px 20px",
-                    marginTop: "20px",
-                    justifyContent: "center",
+                    width: "325px",
+                    mt: 2,
                   }}
                 >
-                  <FormControlLabel
-                    value="mild"
-                    control={<Radio />}
-                    label="Mild"
-                  />
-                  <FormControlLabel
-                    value="moderate"
-                    control={<Radio />}
-                    label="Moderate"
-                  />
-                  <FormControlLabel
-                    value="severe"
-                    control={<Radio />}
-                    label="Severe"
-                  />
-                </RadioGroup>
-                <label className="p-0 m-0 translate-y-5 font-bold">
-                  Experienced Allergic Run
-                </label>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  id="allergies"
-                  onChange={(e) => {
-                    setEAR(e.target.value);
-                  }}
+                  <InputLabel
+                    sx={{
+                      fontSize: 18,
+                    }}
+                    id="allergies"
+                  >
+                    Severity
+                  </InputLabel>
+                  <Select
+                    labelId="blood-group"
+                    label="Allergies"
+                    id="allergies"
+                    onChange={(e) => {
+                      setSeverity(e.target.value);
+                    }}
+                    sx={{
+                      borderRadius: "15px",
+                      "& fieldset": {
+                        border: "2px solid gray",
+                      },
+                    }}
+                    defaultValue=""
+                  >
+                    <MenuItem value={"mild"}>Mild</MenuItem>
+                    <MenuItem value={"moderate"}>Moderate</MenuItem>
+                    <MenuItem value={"severe"}>Severe</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl
                   sx={{
-                    gap: "0px 20px",
-                    marginTop: "20px",
-                    justifyContent: "center",
+                    width: "325px",
+                    mt: 2,
                   }}
                 >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio />}
-                    label="Yes"
-                  />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
-                <label className="p-0 m-0 translate-y-5 font-bold">
-                  Diagnosed the allergy
-                </label>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  id="allergies"
-                  onChange={(e) => {
-                    setDTA(e.target.value);
-                  }}
+                  <InputLabel
+                    sx={{
+                      fontSize: 18,
+                    }}
+                    id="allergies"
+                  >
+                    Experienced Allergic Reactions?
+                  </InputLabel>
+                  <Select
+                    labelId="blood-group"
+                    label="Experienced Allergic Reactions? &nbsp; &nbsp; &nbsp;"
+                    id="Experienced Allergic Reactions?"
+                    onChange={(e) => {
+                      setEAR(e.target.value);
+                    }}
+                    sx={{
+                      borderRadius: "15px",
+                      "& fieldset": {
+                        border: "2px solid gray",
+                      },
+                    }}
+                    defaultValue=""
+                  >
+                    <MenuItem value={"yes"}>Yes</MenuItem>
+                    <MenuItem value={"no"}>No</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl
                   sx={{
-                    gap: "0px 20px",
-                    marginTop: "20px",
-                    justifyContent: "center",
+                    width: "325px",
+                    mt: 2,
                   }}
                 >
-                  <FormControlLabel
-                    value="yes"
-                    control={<Radio />}
-                    label="Yes"
-                  />
-                  <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
-                <label className="p-0 m-0 translate-y-5 font-bold">
-                  Type of allergy
-                </label>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  id="allergies"
-                  onChange={(e) => {
-                    setType(e.target.value);
-                  }}
-                  sx={{
-                    gap: "0px 20px",
-                    marginTop: "20px",
-                    justifyContent: "center",
-                  }}
-                >
-                  <FormControlLabel
-                    value="dust"
-                    control={<Radio />}
-                    label="Dust"
-                  />
-                  <FormControlLabel
-                    value="pollen"
-                    control={<Radio />}
-                    label="Pollen"
-                  />
-                  <FormControlLabel
-                    value="other"
-                    control={<Radio />}
-                    label="Other"
-                  />
-                </RadioGroup>
+                  <InputLabel
+                    sx={{
+                      fontSize: 18,
+                    }}
+                    id="allergies"
+                  >
+                    Diagnose the Allergy?
+                  </InputLabel>
+                  <Select
+                    labelId="blood-group"
+                    label="Experienced Allergic Reactions? &nbsp; &nbsp; &nbsp;"
+                    id="Experienced Allergic Reactions?"
+                    onChange={(e) => {
+                      setDTA(e.target.value);
+                    }}
+                    sx={{
+                      borderRadius: "15px",
+                      "& fieldset": {
+                        border: "2px solid gray",
+                      },
+                    }}
+                    defaultValue=""
+                  >
+                    <MenuItem value={"yes"}>Yes</MenuItem>
+                    <MenuItem value={"no"}>No</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl
+              sx={{
+                width: "325px",
+                mt: 2,
+              }}
+            >
+              <InputLabel
+                sx={{
+                  fontSize: 18,
+                }}
+                id="allergies"
+              >
+                Type of Allergy
+              </InputLabel>
+              <Select
+                labelId="blood-group"
+                label="Type of Allergy &nbsp; &nbsp; &nbsp;"
+                id="Type of Allergy"
+                onChange={(e) => {
+                  setType(e.target.value);
+                }}
+                sx={{
+                  borderRadius: "15px",
+                  "& fieldset": {
+                    border: "2px solid gray",
+                  },
+                }}
+                defaultValue=""
+              >
+                <MenuItem value={"dust"}>Dust</MenuItem>
+                <MenuItem value={"pollen"}>Pollen</MenuItem>
+                <MenuItem value={"other"}>Food</MenuItem>
+                <MenuItem value={"other"}>Medicine</MenuItem>
+                <MenuItem value={"other"}>Other</MenuItem>
+              </Select>
+            </FormControl>
                 {type === false ||
                 type === "dust" ||
                 type === "pollen" ? null : (
                   <>
                     <TextField
-                      label="Others"
+                      label="Please Specify"
                       variant="outlined"
                       placeholder="specify"
                       id="height"

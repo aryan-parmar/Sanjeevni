@@ -20,7 +20,7 @@ const resources = {
       "ask bharti": "Ask Bharti anything that will help you",
       "ask doubt": "Ask Bharti",
 
-      "hi" : "Fill in your Personal Details",
+      "hi" : "Please Specify your Allergies",
     },
   },
   hi: {
@@ -42,7 +42,7 @@ const resources = {
       "ask bharti": "भारती से जो भी पूछें जो आपकी मदद करेगा",
       "ask doubt": "भारती से पूछें",
 
-      "hi" : "अपने व्यक्तिगत विवरण भरें",
+      "hi" : "कृपया अपनी एलर्जी निर्दिष्ट करें",
     },
   },
 };
