@@ -20,7 +20,7 @@ const resources = {
       "ask bharti": "Ask Bharti anything that will help you",
       "ask doubt": "Ask Bharti",
 
-      "hi" : "Welcome to Sanjeevni, We're here to help you keep track of your health information and access the resources you need to stay healthy ",
+      "hi" : "You will get your User Data here with your Personalized Sanjeevni ID",
     },
   },
   hi: {
@@ -42,7 +42,7 @@ const resources = {
       "ask bharti": "भारती से जो भी पूछें जो आपकी मदद करेगा",
       "ask doubt": "भारती से पूछें",
 
-      "hi" : "संजीवनी में आपका स्वागत है, हम आपकी स्वास्थ्य सूचना का ट्रैक रखने और स्वस्थ रहने के लिए आपको जरूरी संसाधनों का उपयोग करने में आपकी मदद करने के लिए यहां हैं",      
+      "hi" : "आपके यहाँ अपने व्यक्तिगत अनुकूलित संजीवनी आईडी के साथ आपका उपयोगकर्ता डेटा मिलेगा",
     },
   },
 };

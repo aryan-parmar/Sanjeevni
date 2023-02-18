@@ -121,7 +121,7 @@ const ChatBot = () => {
             </FormControl>
           </div>
           <div className="w-[90vw] h-[75vh] mt-[15vh] ml-auto mr-auto shadow-2xl bg-white rounded-3xl overflow-hidden flex flex-col justify-between border-2 border-[#004C77]">
-            <div className="h-[15vh] bg-[#004C77]">
+            <div className="h-[20vh] bg-[#004C77]">
               <Typography
                 variant="h4"
                 component="h2"
@@ -176,15 +176,15 @@ const ChatBot = () => {
                   },
                   "&.Mui-focused .MuiInputLabel-root": {
                     fontSize: 18,
-                    color: "#cfcfcf",
+                    color: "#cfcfcf !important",
                   },
                   "& .MuiInputLabel-root": {
                     fontSize: 18,
-                    color: "#cfcfcf",
+                    color: "#cfcfcf !important",
                   },
                   "& .MuiInputBase-input": {
                     fontSize: 18,
-                    color: "#cfcfcf",
+                    color: "#cfcfcf !important",
                   },
                 }}
                 InputProps={{

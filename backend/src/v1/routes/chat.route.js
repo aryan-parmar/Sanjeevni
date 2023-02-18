@@ -23,7 +23,6 @@ router.post("/chatbot", authCheck, async (req, res, next) => {
         err: null,
         out: response.data.choices[0].text.trim(4,-1),
       });
-      console.log(response.data);
   }catch(err){
       console.log(err);
   }

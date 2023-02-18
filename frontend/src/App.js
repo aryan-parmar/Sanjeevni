@@ -30,13 +30,8 @@ import {
   UserPrograms,
   UserSchemes,
   UserSubsidies,
+  UserAccount,
 } from "./user/exports";
-import {
-  Ministry,
-  MinistryLogin,
-  MinistryDashboard,
-  MinistryServices
-} from "./ministry/exports";
 import {
   Help,
   HelpLogin,
@@ -129,6 +124,10 @@ function App() {
       element: <UserDashboard />,
     },
     {
+      path: "/user/account",
+      element: <UserAccount />,
+    },
+    {
       path: "/user/dashboard/data",
       element: <UserData />,
     },
@@ -184,22 +183,22 @@ function App() {
       path: "/user/services/subsidies",
       element: <UserSubsidies />,
     },
-    {
-      path: "/ministry",
-      element: <Ministry />,
-    },
-    {
-      path: "/ministry/login",
-      element: <MinistryLogin />,
-    },
-    {
-      path: "/ministry/dashboard",
-      element: <MinistryDashboard />,
-    },
-    {
-      path: "/ministry/services",
-      element: <MinistryServices />,
-    },
+    // {
+    //   path: "/ministry",
+    //   element: <Ministry />,
+    // },
+    // {
+    //   path: "/ministry/login",
+    //   element: <MinistryLogin />,
+    // },
+    // {
+    //   path: "/ministry/dashboard",
+    //   element: <MinistryDashboard />,
+    // },
+    // {
+    //   path: "/ministry/services",
+    //   element: <MinistryServices />,
+    // },
     {
       path: "/portal/help",
       element: <Help />,
@@ -263,7 +262,7 @@ function App() {
     {
       path: "/portal/hospital/dashboard",
       element: <HospitalDashboard />,
-    },  
+    },
   ]);
   return <RouterProvider router={router} />;
 }

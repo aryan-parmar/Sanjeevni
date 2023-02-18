@@ -7,8 +7,10 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function TemporaryDrawer() {
+    const navigate = useNavigate();
   const [state, setState] = React.useState({
     left: false,
   });
@@ -44,14 +46,30 @@ export default function TemporaryDrawer() {
             Eshan Trivedi
           </Typography>
       <List>
-        {['My Profile','SOS-Emergency' , 'Hospitals', 'Inventory', 'Insights', 'Government Help', 'Consult Doctor', 'Government Policies'].map((text, index) => (
+        {['My Profile', 'Hospitals', 'Insights', 'Government Help', 'Consult Doctor', 'Government Policies'].map((text, index) => (
           <ListItem key={text} sx={{
                 paddingX: "1.5rem",
                 paddingY: "0.25rem",
                 fontSize: "1.5rem",
           }}>
             <ListItemButton>
-              <ListItemText primary={text}/>
+              <ListItemText primary={text} onClick={
+                    () => {
+                        if(text === "My Profile") {
+                            navigate("/user/account")
+                        } else if(text === "Hospitals") {
+                            navigate("/user/dashboard/hospitals")
+                        } else if(text === "Insights") {
+                            navigate("/user/dashboard/insights")
+                        } else if(text === "Government Help") {
+                            navigate("/user/services/help")
+                        } else if(text === "Consult Doctor") {
+                            navigate("/user/services/consult")
+                        } else if(text === "Government Policies") {
+                            navigate("/user/services")
+                        }
+                    }
+              } />
             </ListItemButton>
           </ListItem>
         ))}
