@@ -1,10 +1,7 @@
 import PropTypes from 'prop-types';
-// @mui
 import { Box, Card, Link, Typography, Stack } from '@mui/material';
 import { styled } from '@mui/material/styles';
-// utils
 import { fCurrency } from '../../../utils/formatNumber';
-// components
 import Label from '../../../components/label';
 
 
@@ -54,18 +51,8 @@ export default function ShopProductCard({ product }) {
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography variant="subtitle1">
-            <Typography
-              component="span"
-              variant="body1"
-              sx={{
-                color: 'text.disabled',
-                textDecoration: 'line-through',
-              }}
-            >
-              {priceSale && fCurrency(priceSale)}
-            </Typography>
             &nbsp;
-            {fCurrency(price)}
+            {(price)}
           </Typography>
         </Stack>
       </Stack>
