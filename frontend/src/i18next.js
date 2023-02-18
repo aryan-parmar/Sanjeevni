@@ -18,6 +18,9 @@ const resources = {
       "namaste": "Namaste",
       "namaste bharti": "I am Bharti, your Personal Chat Assistant",
       "ask bharti": "Ask Bharti anything that will help you",
+      "ask doubt": "Ask Bharti",
+
+      "hi" : "Fill in your Personal Details",
     },
   },
   hi: {
@@ -37,6 +40,9 @@ const resources = {
       "namaste": "नमस्ते",
       "namaste bharti": "मैं भारती हूँ, आपका व्यक्तिगत चैट सहायक",
       "ask bharti": "भारती से जो भी पूछें जो आपकी मदद करेगा",
+      "ask doubt": "भारती से पूछें",
+
+      "hi" : "अपने व्यक्तिगत विवरण भरें",
     },
   },
 };

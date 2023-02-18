@@ -141,21 +141,40 @@ const ChatBot = () => {
               <UserMessage />
               <BotMessage />
             </div>
-            <div className="flex justify-center border-t-2 border-[#004C77]" style={{
-            background: "linear-gradient(91.47deg, rgba(72, 173, 247, 0.39) 0.58%, rgba(0, 97, 167, 0.39) 95.65%)"
-        }}>
+            <div className="flex justify-center border-t-2 border-[#004C77] bg-[#004C77]">
               <TextField
-                label="Full Name&nbsp;&nbsp;"
+                label={t("ask doubt")}
                 variant="outlined"
                 fullWidth
                 sx={{
                   mb: 4,
+                  "& fieldset": {
+                    borderColor: "#cfcfcf !important",
+                    borderWidth: 2,
+                    borderRadius: "15px !important",
+                  },
+                  "&.Mui-focused .MuiInputLabel-root": {
+                    fontSize: 18,
+                    color: "#cfcfcf",
+                  },
+                  "& .MuiInputLabel-root": {
+                    fontSize: 18,
+                    color: "#cfcfcf",
+                  },
+                  "& .MuiInputBase-input": {
+                    fontSize: 18,
+                    color: "#cfcfcf",
+                  },
                 }}
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
                       <IconButton type="submit" aria-label="send">
-                        <SendIcon />
+                        <SendIcon
+                          style={{
+                            color: "#cfcfcf",
+                          }}
+                        />
                       </IconButton>
                     </InputAdornment>
                   ),

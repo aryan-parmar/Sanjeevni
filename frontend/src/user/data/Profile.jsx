@@ -153,7 +153,7 @@ const Profile = () => {
                   borderRadius: "15px",
 
                   "& fieldset": {
-                    height: "45px",
+                    height: "50px",
                     border: "2px solid gray",
                   },
                 }}
