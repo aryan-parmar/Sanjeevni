@@ -6,9 +6,7 @@ import { styled } from '@mui/material/styles';
 import { fCurrency } from '../../../utils/formatNumber';
 // components
 import Label from '../../../components/label';
-import { ColorPreview } from '../../../components/color-utils';
 
-// ----------------------------------------------------------------------
 
 const StyledProductImg = styled('img')({
   top: 0,
@@ -18,7 +16,6 @@ const StyledProductImg = styled('img')({
   position: 'absolute',
 });
 
-// ----------------------------------------------------------------------
 
 ShopProductCard.propTypes = {
   product: PropTypes.object,
@@ -56,8 +53,7 @@ export default function ShopProductCard({ product }) {
         </Link>
 
         <Stack direction="row" alignItems="center" justifyContent="space-between">
-          <ColorPreview colors={colors} />
-          <Typography variant="subtitle1">
+            <Typography variant="subtitle1">
             <Typography
               component="span"
               variant="body1"
