@@ -86,6 +86,7 @@ const Personal = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Lang"
+                defaultValue={'en'}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value);
                 }}

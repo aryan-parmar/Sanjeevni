@@ -6,6 +6,7 @@ const Form = require("../../models/Form.model");
 
 router.post("/form", authCheck, async (req, res, next) => {
   try {
+    console.log(req.body);
     const { formFields, formNum } = req.body;
     console.log(formFields);
     let form = await Form.findOne({ userId: req.user.user_id });

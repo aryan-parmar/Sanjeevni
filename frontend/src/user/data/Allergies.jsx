@@ -3,9 +3,6 @@ import { Theme } from "../../components/Theme";
 import {
   TextField,
   Typography,
-  RadioGroup,
-  Radio,
-  FormControlLabel,
   Select,
   FormControl,
   InputLabel,
@@ -85,6 +82,7 @@ const Allergies = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Lang"
+                defaultValue={"en"}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value);
                 }}

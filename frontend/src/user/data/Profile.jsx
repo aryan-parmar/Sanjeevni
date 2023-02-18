@@ -14,49 +14,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
-
-const forms = [
-  {
-    title: "personal profile",
-    route: "personal",
-    complete: false,
-  },
-  {
-    title: "allergies profile",
-    route: "allergies",
-    complete: false,
-  },
-  {
-    title: "illnesses profile",
-    route: "illnesses",
-    complete: false,
-  },
-  {
-    title: "history profile",
-    route: "history",
-    complete: false,
-  },
-  {
-    title: "vaccination profile",
-    route: "vaccination",
-    complete: false,
-  },
-  {
-    title: "surgeries profile",
-    route: "surgeries",
-    complete: false,
-  },
-  {
-    title: "insurance profile",
-    route: "insurance",
-    complete: false,
-  },
-  {
-    title: "emergency profile",
-    route: "emergency",
-    complete: false,
-  },
-];
+import apiPost from "../../utilities/apiCall";
 
 const Card = (props) => {
   const navigate = useNavigate();
@@ -116,11 +74,71 @@ const Card = (props) => {
 const Profile = () => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  let [data, setData] = React.useState();
+  let [forms, setForms] = React.useState([
+    {
+      title: "personal profile",
+      route: "personal",
+      complete: false,
+    },
+    {
+      title: "allergies profile",
+      route: "allergies",
+      complete: false,
+    },
+    {
+      title: "illnesses profile",
+      route: "illnesses",
+      complete: false,
+    },
+    {
+      title: "history profile",
+      route: "history",
+      complete: false,
+    },
+    {
+      title: "vaccination profile",
+      route: "vaccination",
+      complete: false,
+    },
+    {
+      title: "surgeries profile",
+      route: "surgeries",
+      complete: false,
+    },
+    {
+      title: "insurance profile",
+      route: "insurance",
+      complete: false,
+    },
+    {
+      title: "emergency profile",
+      route: "emergency",
+      complete: false,
+    },
+  ]);
+  useEffect(() => {
+    apiPost("get/formdata", {}, setData);
+  }, []);
+
+  useEffect(() => {
+    if (data) {
+      if (!data.err) {
+        let temp = forms;
+        for (let i = 0; i < temp.length; i++) {
+          temp[i].complete = data.data[i];
+        }
+        setForms([...temp]);
+      }
+    }
+  }, [data]);
   useEffect(() => {
     i18n.changeLanguage("en");
   }, []);
   const speakHindi = () => {
-    const utterance = new SpeechSynthesisUtterance("प्रोफ़ाइल पूरा करके शुरू करें");
+    const utterance = new SpeechSynthesisUtterance(
+      "प्रोफ़ाइल पूरा करके शुरू करें"
+    );
     utterance.lang = "hi-IN";
     speechSynthesis.speak(utterance);
   };
@@ -146,6 +164,7 @@ const Profile = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Lang"
+                defaultValue={"en"}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value);
                 }}

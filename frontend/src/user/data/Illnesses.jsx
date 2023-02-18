@@ -6,10 +6,6 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
-  Select,
-  FormControl,
-  InputLabel,
-  MenuItem,
   Button,
 } from "@mui/material";
 import apiPost from "../../utilities/apiCall";

@@ -1,15 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import { Theme } from "../../components/Theme";
 import {
-  TextField,
   Typography,
   RadioGroup,
   Radio,
   FormControlLabel,
-  Select,
-  FormControl,
-  InputLabel,
-  MenuItem,
   Button,
 } from "@mui/material";
 import apiPost from "../../utilities/apiCall";

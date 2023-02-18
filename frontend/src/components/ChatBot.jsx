@@ -14,37 +14,32 @@ import SendIcon from "@mui/icons-material/Send";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Bharti from "../assets/bharti.png";
+import apiPost from "../utilities/apiCall";
 
-const UserMessage = () => {
-  const navigate = useNavigate();
+const UserMessage = (props) => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage("en");
   }, []);
+  return (
+    <>
+      <div className="h-auto my-2 mr-2 flex justify-end items-end">
+        <div className="h-auto w-[65%] my-2 rounded-lg py-2 px-4 bg-slate-200">
+          {props.msg}
+        </div>
+      </div>
+    </>
+  );
+};
+const BotMessage = (props) => {
   return (
     <>
       <div className="h-auto my-2 flex justify-start items-end">
         <div className="h-7 w-7 my-2 mx-2">
           <img src={Bharti}></img>
         </div>
-        <div className="h-auto w-[65%] my-2 rounded-lg py-2 px-4 bg-slate-200">
-          {t("namaste bharti")}
-        </div>
-      </div>
-    </>
-  );
-};
-const BotMessage = () => {
-  const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
-  useEffect(() => {
-    i18n.changeLanguage("en");
-  }, []);
-  return (
-    <>
-      <div className="h-auto my-2 flex justify-end items-end">
-        <div className="h-auto w-[65%] my-2 rounded-lg py-2 px-4 bg-lime-200 mr-2">
-          {t("namaste bharti")}
+        <div className="h-auto w-[65%] my-2 rounded-lg py-2 px-4 bg-cyan-100 mr-2">
+          {props.msg}
         </div>
       </div>
     </>
@@ -52,8 +47,23 @@ const BotMessage = () => {
 };
 
 const ChatBot = () => {
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const [msg, setMsg] = React.useState("");
+  const [data, setData] = React.useState("");
+  const [messages, setMessages] = React.useState([]);
+  function submit(e) {
+    apiPost("chat/chatbot", { msg: msg }, setData);
+    setMessages((oldArray) => [...oldArray, { msg: msg, type: "user" }]);
+    setMsg("");
+  }
+
+  useEffect(() => {
+    if (data) {
+      if(data.out){
+        setMessages((oldArray) => [...oldArray, { msg: data.out, type: "bot" }]);
+      }
+    }
+  }, [data]);
   useEffect(() => {
     i18n.changeLanguage("en");
   }, []);
@@ -92,6 +102,7 @@ const ChatBot = () => {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Lang"
+                defaultValue={"en"}
                 onChange={(e) => {
                   i18n.changeLanguage(e.target.value);
                 }}
@@ -137,15 +148,25 @@ const ChatBot = () => {
                 {t("ask bharti")}
               </p>
             </div>
-            <div className="flex flex-col justify-end">
-              <UserMessage />
-              <BotMessage />
+            <div className="flex flex-col justify-start h-full overflow-auto">
+              <BotMessage msg={t("namaste bharti")} />
+              {messages.map((message, index) => {
+                if (message.type === "user") {
+                  return <UserMessage msg={message.msg} key={index}/>;
+                } else {
+                  return <BotMessage msg={message.msg} key={index}/>;
+                }
+              })}
             </div>
             <div className="flex justify-center border-t-2 border-[#004C77] bg-[#004C77]">
               <TextField
                 label={t("ask doubt")}
                 variant="outlined"
                 fullWidth
+                value={msg}
+                onChange={(e) => {
+                  setMsg(e.target.value);
+                }}
                 sx={{
                   mb: 4,
                   "& fieldset": {
@@ -169,7 +190,11 @@ const ChatBot = () => {
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
-                      <IconButton type="submit" aria-label="send">
+                      <IconButton
+                        type="submit"
+                        aria-label="send"
+                        onClick={(e) => submit(e)}
+                      >
                         <SendIcon
                           style={{
                             color: "#cfcfcf",

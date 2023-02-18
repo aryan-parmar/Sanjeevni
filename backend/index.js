@@ -9,6 +9,8 @@ const port = process.env.PORT || 4000;
 const version = "v1";
 const auth = require("./src/v1/routes/auth.route");
 const update = require("./src/v1/routes/update.route");
+const get = require("./src/v1/routes/get.route");
+const chat = require("./src/v1/routes/chat.route");
 var cors = require("cors");
 app.use(express.json());
 app.use(cookieParser());
@@ -18,14 +20,16 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(cors({
-    origin: 'http://192.168.45.242:3000',
+    origin: 'http://localhost:3000',
     credentials: true
 }))
 app.get('/', (req, res) => {
   res.json({'message': 'Server up'});
 })
 app.use('/api/auth/', auth);
-// app.use('/api/post/', post);
+app.use('/api/update/', update);
+app.use('/api/get/', get);
+app.use('/api/chat/', chat);
 // app.use('/api/profile/', profile);
 
 app.listen(port, () => {
