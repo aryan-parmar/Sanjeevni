@@ -6,16 +6,23 @@ const Form = require("../../models/Form.model");
 
 router.post("/form", authCheck, async (req, res, next) => {
   try {
-    const { formNum, formFields, formResponses } = req.body;
-    const form = await Form.findOne({userId: req.user.user_id});
+    const { formFields, formNum } = req.body;
+    console.log(formFields);
+    let form = await Form.findOne({ userId: req.user.user_id });
+    let b = {};
+    b["userId"] = form.userId;
+    b["formName"] = form.formName;
+    b["form"] = form.form;
+    b["createdAt"] = form.createdAt;
+    b["updatedAt"] = Date.now();
     if (form) {
-      formFields.forEach((field, index) => {
-        form.formFields.push(field);
-        form.formResponses.push(formResponses[index]);
-      });
-      form.formUpdatedAt = Date.now();
-      form.formName[formNum] = true;
-      form.save();
+      await Form.deleteOne({ userId: req.user.user_id });
+      b.formName[formNum] = true;
+      let a = form.form || {};
+      Object.assign(a, formFields);
+      b["form"] = a;
+      console.log(a);
+      Form.create(b);
       res.status(200).json({ err: null, message: "Form Updated" });
     } else {
       res.status(404).json({ err: "Form Not Found" });

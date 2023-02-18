@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Theme } from "../../components/Theme";
 import {
   TextField,
@@ -18,46 +18,37 @@ import { useNavigate } from "react-router-dom";
 const Personal = () => {
   const navigate = useNavigate();
   const dob = React.useRef();
-  let gender = '';
+  let gender = "";
   const address = React.useRef();
   const blood_group = React.useRef();
-  let diet = '';
+  let diet = "";
   const height = React.useRef();
   const weight = React.useRef();
-  var smoker = '';
-  var alcoholic = '';
+  var smoker = "";
+  var alcoholic = "";
   let [data, setData] = React.useState();
   function submit(e) {
     e.preventDefault();
-    const formFields = [
-      dob.current.id,
-      "gender",
-      address.current.id,
-      "blood_group",
-      "diet",
-      height.current.id,
-      weight.current.id,
-      "smoker",
-      "alcoholic",
-    ];
-    const formResponses = [
-      dob.current.value,
-      gender,
-      address.current.value,
-      blood_group.current.value,
-      diet,
-      height.current.value,
-      weight.current.value,
-      smoker,
-      alcoholic,
-    ];
-    const formdata = {
-      formFields,
-      formResponses,
-      formNum: 0,
+    const formFields = {
+      dob: dob.current.value,
+      gender: gender,
+      address: address.current.value,
+      blood_group: blood_group.current.value,
+      diet: diet,
+      height: height.current.value,
+      weight: weight.current.value,
+      smoker: smoker,
+      alcoholic: alcoholic,
     };
-    apiPost("update/form", formdata, setData);
+    apiPost("update/form", { formFields, formNum: 0 }, setData);
   }
+  useEffect(() => {
+    if (data) {
+      if (!data.err) {
+        navigate("/user/profile");
+      }
+    }
+  }, [data]);
   return (
     <>
       <Theme>
@@ -107,7 +98,9 @@ const Personal = () => {
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               id="gender"
-              onChange={(e)=>{ gender = e.target.value}}
+              onChange={(e) => {
+                gender = e.target.value;
+              }}
               sx={{
                 gap: "0px 20px",
                 marginTop: "20px",
@@ -177,7 +170,9 @@ const Personal = () => {
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               id="diet"
-              onChange={(e)=>{ diet = e.target.value}}
+              onChange={(e) => {
+                diet = e.target.value;
+              }}
               sx={{
                 gap: "0px 20px",
                 marginTop: "20px",
@@ -215,7 +210,9 @@ const Personal = () => {
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               id="smoker"
-              onChange={(e)=>{ smoker = e.target.value}}
+              onChange={(e) => {
+                smoker = e.target.value;
+              }}
               sx={{
                 gap: "0px 20px",
                 marginTop: "20px",
@@ -239,7 +236,9 @@ const Personal = () => {
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
               id="alcoholic"
-              onChange={(e)=>{ alcoholic = e.target.value}}
+              onChange={(e) => {
+                alcoholic = e.target.value;
+              }}
               sx={{
                 gap: "0px 20px",
                 marginTop: "0px",
