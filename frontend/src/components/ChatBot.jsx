@@ -157,6 +157,7 @@ const ChatBot = () => {
                   return <BotMessage msg={message.msg} key={index}/>;
                 }
               })}
+              <div ref={(el) => { el && el.scrollIntoView({ behavior: 'smooth' }) }}></div>
             </div>
             <div className="flex justify-center border-t-2 border-[#004C77] bg-[#004C77]">
               <TextField
