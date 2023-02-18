@@ -12,10 +12,52 @@ import {
   MenuItem,
   Button,
 } from "@mui/material";
+import apiPost from "../../utilities/apiCall";
 import { useNavigate } from "react-router-dom";
 
 const Personal = () => {
   const navigate = useNavigate();
+  const dob = React.useRef();
+  let gender = '';
+  const address = React.useRef();
+  const blood_group = React.useRef();
+  let diet = '';
+  const height = React.useRef();
+  const weight = React.useRef();
+  var smoker = '';
+  var alcoholic = '';
+  let [data, setData] = React.useState();
+  function submit(e) {
+    e.preventDefault();
+    const formFields = [
+      dob.current.id,
+      "gender",
+      address.current.id,
+      "blood_group",
+      "diet",
+      height.current.id,
+      weight.current.id,
+      "smoker",
+      "alcoholic",
+    ];
+    const formResponses = [
+      dob.current.value,
+      gender,
+      address.current.value,
+      blood_group.current.value,
+      diet,
+      height.current.value,
+      weight.current.value,
+      smoker,
+      alcoholic,
+    ];
+    const formdata = {
+      formFields,
+      formResponses,
+      formNum: 0,
+    };
+    apiPost("update/form", formdata, setData);
+  }
   return (
     <>
       <Theme>
@@ -53,16 +95,19 @@ const Personal = () => {
             Get Started by Completing your Profile
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-2 mt-14 pb-32">
-            <TextField label="Full Name&nbsp;&nbsp;" variant="outlined" />
             <TextField
-              label="Age&nbsp;&nbsp;"
+              label="Date of birth"
               variant="outlined"
               type={"date"}
+              id="dob"
+              inputRef={dob}
             />
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              id="gender"
+              onChange={(e)=>{ gender = e.target.value}}
               sx={{
                 gap: "0px 20px",
                 marginTop: "20px",
@@ -81,7 +126,12 @@ const Personal = () => {
                 label="Other"
               />
             </RadioGroup>
-            <TextField label="Adress&nbsp;&nbsp;" variant="outlined" />
+            <TextField
+              label="Address&nbsp;&nbsp;"
+              variant="outlined"
+              id="address"
+              inputRef={address}
+            />
             <FormControl
               sx={{
                 width: "325px",
@@ -89,35 +139,45 @@ const Personal = () => {
               }}
             >
               <InputLabel
-                id="demo-simple-select-label"
                 sx={{
                   fontSize: 18,
                 }}
+                id="blood-group"
               >
                 Blood Group
               </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
+                labelId="blood-group"
                 label="Blood Group"
+                id="blood_group"
+                inputRef={blood_group}
                 sx={{
                   borderRadius: "15px",
                   "& fieldset": {
                     border: "2px solid gray",
                   },
                 }}
+                defaultValue=""
               >
-                <MenuItem value={"A"}>A</MenuItem>
-                <MenuItem value={"B"}>B</MenuItem>
-                <MenuItem value={"C"}>C</MenuItem>
-                <MenuItem value={"AB"}>AB</MenuItem>
-                <MenuItem value={"O"}>O</MenuItem>
+                {/* <MenuItem defaultValue="">select</MenuItem> */}
+                <MenuItem value={"A+"}>A+</MenuItem>
+                <MenuItem value={"A-"}>A-</MenuItem>
+                <MenuItem value={"B+"}>B+</MenuItem>
+                <MenuItem value={"B-"}>B-</MenuItem>
+                <MenuItem value={"C+"}>C+</MenuItem>
+                <MenuItem value={"C-"}>C-</MenuItem>
+                <MenuItem value={"AB+"}>AB+</MenuItem>
+                <MenuItem value={"AB-"}>AB-</MenuItem>
+                <MenuItem value={"O+"}>O+</MenuItem>
+                <MenuItem value={"O-"}>O-</MenuItem>
               </Select>
             </FormControl>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              id="diet"
+              onChange={(e)=>{ diet = e.target.value}}
               sx={{
                 gap: "0px 20px",
                 marginTop: "20px",
@@ -140,16 +200,22 @@ const Personal = () => {
               label="Height&nbsp;&nbsp;"
               variant="outlined"
               placeholder="in CentiMeters"
+              id="height"
+              inputRef={height}
             />
             <TextField
               label="Weight&nbsp;&nbsp;"
               variant="outlined"
               placeholder="in Kilograms"
+              id="weight"
+              inputRef={weight}
             />
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              id="smoker"
+              onChange={(e)=>{ smoker = e.target.value}}
               sx={{
                 gap: "0px 20px",
                 marginTop: "20px",
@@ -172,6 +238,8 @@ const Personal = () => {
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              id="alcoholic"
+              onChange={(e)=>{ alcoholic = e.target.value}}
               sx={{
                 gap: "0px 20px",
                 marginTop: "0px",
@@ -193,7 +261,7 @@ const Personal = () => {
             <Button
               variant="contained"
               sx={{ mt: 5 }}
-              onClick={() => navigate("/user/dashboard")}
+              onClick={(e) => submit(e)}
             >
               Continue
             </Button>

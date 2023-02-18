@@ -24,3 +24,4 @@ router.post("/form", authCheck, async (req, res, next) => {
     console.log(err);
   }
 });
+module.exports = router;
