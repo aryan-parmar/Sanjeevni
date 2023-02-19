@@ -6,6 +6,7 @@ import ChatIcon from "@mui/icons-material/Chat";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { apiCheckLogin } from "../../utilities/apiCall";
 import {
   Typography,
   FormControl,
@@ -16,6 +17,8 @@ import {
 import Favicon from "../../assets/favicon.svg";
 import Health from "../../assets/healthcare.png";
 import Doctor from "../../assets/doctor.png";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Featured = () => {
   return (
@@ -87,6 +90,43 @@ const Card = (props) => {
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  function showNotification(data) {
+    new Notification(data);
+  }
+  let [a, setA] = React.useState(null);
+  React.useEffect(() => {
+    if (!a) {
+      apiCheckLogin(setA);
+    }
+  }, []);
+  React.useEffect(() => {
+    if (a) {
+      if (a.err) {
+        navigate("/user");
+      }
+      else{
+
+        if (!("Notification" in window)) {
+          console.log("Browser does not support desktop notification");
+        } else {
+          Notification.requestPermission();
+        }
+        const unsubscribe = onSnapshot(collection(db, "emergency"), (data) => {
+          data.docChanges().forEach((change) => {
+            console.log(change);
+            if (change.type === "added") {
+              if (a.user.user_id !== change.doc.data().user_id)
+              showNotification(
+                "Emergency Alert " +
+                  change.doc.data().username +
+                  " has requested for help"
+              );
+            }
+          });
+        });
+      }
+    }
+  }, [a]);
   const speakHindi = () => {
     const utterance = new SpeechSynthesisUtterance(
       "संजीवनी में आपका स्वागत है, हम आपकी स्वास्थ्य सूचना का ट्रैक रखने और स्वस्थ रहने के लिए आपको जरूरी संसाधनों का उपयोग करने में आपकी मदद करने के लिए यहां हैं"
@@ -104,7 +144,7 @@ const Dashboard = () => {
         <div className="min-h-[100vh]">
           <div className="flex justify-between">
             <TemporaryDrawer />
-            <div className="flex justify-around"> 
+            <div className="flex justify-around">
               <RecordVoiceOverIcon
                 sx={{
                   fontSize: "2rem",
@@ -145,9 +185,10 @@ const Dashboard = () => {
               <span
                 style={{
                   fontWeight: "900",
+                  textTransform: "capitalize",
                 }}
               >
-                Eshan
+                {a && a.user ? a.user.Username : ""}
               </span>
             </Typography>
             <p

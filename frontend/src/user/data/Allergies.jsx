@@ -15,9 +15,46 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ChatIcon from "@mui/icons-material/Chat";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import { apiCheckLogin } from "../../utilities/apiCall";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Allergies = () => {
   const navigate = useNavigate();
+  function showNotification(data) {
+    new Notification(data);
+  }
+  let [a, setA] = React.useState(null);
+  React.useEffect(() => {
+    if (!a) {
+      apiCheckLogin(setA);
+    }
+  }, []);
+  React.useEffect(() => {
+    if (a) {
+      if (a.err) {
+        navigate("/user");
+      }
+      if (!("Notification" in window)) {
+        console.log("Browser does not support desktop notification");
+      } else {
+        Notification.requestPermission();
+      }
+      const unsubscribe = onSnapshot(collection(db, "emergency"), (data) => {
+        data.docChanges().forEach((change) => {
+          console.log(change);
+          if (change.type === "added") {
+            if (a.user.user_id !== change.doc.data().user_id)
+              showNotification(
+                "Emergency Alert " +
+                  change.doc.data().username +
+                  " has requested for help"
+              );
+          }
+        });
+      });
+    }
+  }, [a]);
   const { t, i18n } = useTranslation();
   useEffect(() => {
     i18n.changeLanguage("en");

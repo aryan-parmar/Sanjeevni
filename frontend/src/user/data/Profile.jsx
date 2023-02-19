@@ -14,7 +14,9 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ChatIcon from "@mui/icons-material/Chat";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
-import apiPost from "../../utilities/apiCall";
+import apiPost, {apiCheckLogin} from "../../utilities/apiCall";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Card = (props) => {
   const navigate = useNavigate();
@@ -73,6 +75,40 @@ const Card = (props) => {
 
 const Profile = () => {
   const navigate = useNavigate();
+  function showNotification(data) {
+    new Notification(data);
+  }
+  let [a, setA] = React.useState(null);
+  React.useEffect(() => {
+    if (!a) {
+      apiCheckLogin(setA);
+    }
+  }, []);
+  React.useEffect(() => {
+    if (a) {
+      if (a.err) {
+        navigate("/user");
+      }
+      if (!("Notification" in window)) {
+        console.log("Browser does not support desktop notification");
+      } else {
+        Notification.requestPermission();
+      }
+      const unsubscribe = onSnapshot(collection(db, "emergency"), (data) => {
+        data.docChanges().forEach((change) => {
+          console.log(change);
+          if (change.type === "added") {
+            if (a.user.user_id !== change.doc.data().user_id)
+              showNotification(
+                "Emergency Alert " +
+                  change.doc.data().username +
+                  " has requested for help"
+              );
+          }
+        });
+      });
+    }
+  }, [a]);
   const { t, i18n } = useTranslation();
   let [data, setData] = React.useState();
   let [forms, setForms] = React.useState([

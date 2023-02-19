@@ -4,14 +4,27 @@ import Drawer from "@mui/material/Drawer";
 import { Typography, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import SOS from "../assets/sos.png";
+import { apiCheckLogin } from "../utilities/apiCall";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function SosDrawer() {
   const navigate = useNavigate();
   const [state, setState] = React.useState({
     bottom: false,
   });
-
-  const toggleDrawer = (anchor, open) => (event) => {
+  let [a, setA] = React.useState(null);
+  React.useEffect(() => {
+    if (!a) {
+      apiCheckLogin(setA);
+    }
+  }, []);
+  const toggleDrawer = (anchor, open) => async (event) => {
+    const docRef = await addDoc(collection(db, "emergency"), {
+      user_id: a.user.user_id,
+      username: a.user.Username,
+      emergency: true,
+    });
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -34,23 +47,23 @@ export default function SosDrawer() {
       }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
-        <Typography
-            variant="h4"
-            component="h2"
-            color="primary.contrastText"
-            sx={{
-                fontSize: "1.5rem",
-                color: "#000",
-                textAlign: "center",
-                m: 2,
-                mb: 4,
-                fontFamily: "Poppins, sans-serif",
-            }}
-        >
-            Emergency Message Sent
-        </Typography>
+      <Typography
+        variant="h4"
+        component="h2"
+        color="primary.contrastText"
+        sx={{
+          fontSize: "1.5rem",
+          color: "#000",
+          textAlign: "center",
+          m: 2,
+          mb: 4,
+          fontFamily: "Poppins, sans-serif",
+        }}
+      >
+        Emergency Message Sent
+      </Typography>
       <Button variant="contained" className="ml-[50vw]">
         Cancel
       </Button>

@@ -13,7 +13,10 @@ import {
 } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-import SearchIcon from '@mui/icons-material/Search';
+import SearchIcon from "@mui/icons-material/Search";
+import { apiCheckLogin } from "../../utilities/apiCall";
+import { collection, onSnapshot } from "firebase/firestore";
+import { db } from "../../firebase";
 
 const Card = ({ title, location, number, link }) => {
   return (
@@ -80,6 +83,40 @@ const Card = ({ title, location, number, link }) => {
 
 const Hospital = () => {
   const navigate = useNavigate();
+  function showNotification(data) {
+    new Notification(data);
+  }
+  let [a, setA] = React.useState(null);
+  React.useEffect(() => {
+    if (!a) {
+      apiCheckLogin(setA);
+    }
+  }, []);
+  React.useEffect(() => {
+    if (a) {
+      if (a.err) {
+        navigate("/user");
+      }
+      if (!("Notification" in window)) {
+        console.log("Browser does not support desktop notification");
+      } else {
+        Notification.requestPermission();
+      }
+      const unsubscribe = onSnapshot(collection(db, "emergency"), (data) => {
+        data.docChanges().forEach((change) => {
+          console.log(change);
+          if (change.type === "added") {
+            if (a.user.user_id !== change.doc.data().user_id)
+              showNotification(
+                "Emergency Alert " +
+                  change.doc.data().username +
+                  " has requested for help"
+              );
+          }
+        });
+      });
+    }
+  }, [a]);
   const speakHindi = () => {
     const utterance = new SpeechSynthesisUtterance(
       "संजीवनी में आपका स्वागत है, हम आपकी स्वास्थ्य सूचना का ट्रैक रखने और स्वस्थ रहने के लिए आपको जरूरी संसाधनों का उपयोग करने में आपकी मदद करने के लिए यहां हैं"
@@ -152,47 +189,44 @@ const Hospital = () => {
             Search Hospitals & Schedule Appointments
           </p>
           <div className="flex flex-col items-center justify-center">
-          <TextField
-            label="Search Hospital &nbsp;&nbsp;&nbsp;"
-            variant="outlined"
-            fullWidth
-            sx={{
-              my: 7,
-              "& fieldset": {
-                borderColor: "#cfcfcf !important",
-                borderWidth: 2,
-                borderRadius: "15px !important",
-              },
-              "&.Mui-focused .MuiInputLabel-root": {
-                fontSize: 18,
-                color: "#cfcfcf !important",
-              },
-              "& .MuiInputLabel-root": {
-                fontSize: 18,
-                color: "#cfcfcf !important",
-              },
-              "& .MuiInputBase-input": {
-                fontSize: 18,
-                color: "#000 !important",
-              },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    type="submit"
-                    aria-label="send"
-                  >
-                    <SearchIcon
-                      style={{
-                        color: "#cfcfcf",
-                      }}
-                    />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
+            <TextField
+              label="Search Hospital &nbsp;&nbsp;&nbsp;"
+              variant="outlined"
+              fullWidth
+              sx={{
+                my: 7,
+                "& fieldset": {
+                  borderColor: "#cfcfcf !important",
+                  borderWidth: 2,
+                  borderRadius: "15px !important",
+                },
+                "&.Mui-focused .MuiInputLabel-root": {
+                  fontSize: 18,
+                  color: "#cfcfcf !important",
+                },
+                "& .MuiInputLabel-root": {
+                  fontSize: 18,
+                  color: "#cfcfcf !important",
+                },
+                "& .MuiInputBase-input": {
+                  fontSize: 18,
+                  color: "#000 !important",
+                },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton type="submit" aria-label="send">
+                      <SearchIcon
+                        style={{
+                          color: "#cfcfcf",
+                        }}
+                      />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
             <Card
               title="Apollo Hospital"
               location="20mins | Churchgate, Mumbai"
