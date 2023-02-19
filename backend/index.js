@@ -20,7 +20,7 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(cors({
-    origin: 'http://192.168.7.242:3000',
+    origin: ['http://192.168.7.242:3000', 'http://192.168.7.242:3001'],
     credentials: true
 }))
 // const allowedOrigins = [
