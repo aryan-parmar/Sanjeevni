@@ -114,7 +114,6 @@ const Dashboard = () => {
         }
         const unsubscribe = onSnapshot(collection(db, "emergency"), (data) => {
           data.docChanges().forEach((change) => {
-            console.log(change);
             if (change.type === "added") {
               if (a.user.user_id !== change.doc.data().user_id)
               showNotification(
