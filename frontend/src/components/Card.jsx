@@ -37,6 +37,8 @@ export default function ImgMediaCard(props) {
             background: "transparent",
             padding: "0 !important",
             border: "1px solid #0061A7",
+            marginLeft: "10px !important",
+            marginBottom: "10px !important",
             width: "35%",
             height: "2.5rem",
         }}>Apply</Button>
@@ -45,6 +47,8 @@ export default function ImgMediaCard(props) {
             color: "#0061A7",
             background: "transparent",
             padding: "0 !important",
+            marginLeft: "10px !important",
+            marginBottom: "10px !important",
             border: "1px solid #0061A7",
             width: "40%",
             height: "2.5rem",

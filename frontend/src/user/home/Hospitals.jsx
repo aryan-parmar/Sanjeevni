@@ -10,6 +10,7 @@ import {
   TextField,
   InputAdornment,
   IconButton,
+  Button
 } from "@mui/material";
 import CallIcon from "@mui/icons-material/Call";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -295,6 +296,13 @@ const Hospital = () => {
               number="+91 9876543210"
               link="https://www.nanavati.org/"
             />
+            <Button
+              variant="contained"
+              sx={{ mt: 5, mb: 10 }}
+              onClick={() => navigate("/user/dashboard")}
+            >
+              Check Report History
+            </Button>
           </div>
         </div>
       </Theme>
