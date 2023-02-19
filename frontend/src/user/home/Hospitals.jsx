@@ -227,6 +227,44 @@ const Hospital = () => {
                 ),
               }}
             />
+            <TextField
+              label="Search Hospital &nbsp;&nbsp;&nbsp;"
+              variant="outlined"
+              fullWidth
+              sx={{
+                my: 7,
+                "& fieldset": {
+                  borderColor: "#cfcfcf !important",
+                  borderWidth: 2,
+                  borderRadius: "15px !important",
+                },
+                "&.Mui-focused .MuiInputLabel-root": {
+                  fontSize: 18,
+                  color: "#cfcfcf !important",
+                },
+                "& .MuiInputLabel-root": {
+                  fontSize: 18,
+                  color: "#cfcfcf !important",
+                },
+                "& .MuiInputBase-input": {
+                  fontSize: 18,
+                  color: "#000 !important",
+                },
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton type="submit" aria-label="send">
+                      <SearchIcon
+                        style={{
+                          color: "#cfcfcf",
+                        }}
+                      />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
             <Card
               title="Apollo Hospital"
               location="20mins | Churchgate, Mumbai"
