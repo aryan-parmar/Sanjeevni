@@ -1,20 +1,27 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from "react";
 import { Theme } from "../../components/Theme";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ChatIcon from "@mui/icons-material/Chat";
 import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
-import {
-  Typography,
-  Fab,
-  TextField,
-  InputAdornment,
-  IconButton,
-} from "@mui/material";
+import TranslateIcon from "@mui/icons-material/Translate";
+import { Typography } from "@mui/material";
+import Graph1 from "../../assets/graph1.png";
+import Graph2 from "../../assets/graph2.png";
+import Graph3 from "../../assets/graph3.png";
 
+const Graph = (props) => {
+  return (
+    <>
+      <div className="w-[90vw] h-[auto] my-16 rounded-lg mx-auto -translate-x-2   ">
+        <img src={props.image} />
+      </div>
+    </>
+  );
+};
 
 const Insights = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const speakHindi = () => {
     const utterance = new SpeechSynthesisUtterance(
       "संजीवनी में आपका स्वागत है, हम आपकी स्वास्थ्य सूचना का ट्रैक रखने और स्वस्थ रहने के लिए आपको जरूरी संसाधनों का उपयोग करने में आपकी मदद करने के लिए यहां हैं"
@@ -41,7 +48,7 @@ const Insights = () => {
               <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
             </svg>
             <div className="flex justify-around">
-            <TranslateIcon
+              <TranslateIcon
                 sx={{
                   fontSize: "2rem",
                   position: "absolute",
@@ -66,7 +73,7 @@ const Insights = () => {
                   fontSize: "2rem",
                   position: "absolute",
                   top: "1.5rem",
-                  right: "5rem",
+                  right: "4.5rem",
                   cursor: "pointer",
                 }}
                 onClick={() => navigate("/user/chatbot")}
@@ -96,10 +103,13 @@ const Insights = () => {
           >
             Health Insights based on User Profile
           </p>
-          </div>
-        </Theme>
+          <Graph image={Graph1}/>
+          <Graph image={Graph2}/>
+          <Graph image={Graph3}/>
+        </div>
+      </Theme>
     </>
-  )
-}
+  );
+};
 
-export default Insights
+export default Insights;
