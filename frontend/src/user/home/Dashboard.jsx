@@ -113,6 +113,7 @@ const Dashboard = () => {
           Notification.requestPermission();
         }
         const unsubscribe = onSnapshot(collection(db, "emergency"), (data) => {
+          console.log("gg")
           data.docChanges().forEach((change) => {
             if (change.type === "added") {
               if (a.user.user_id !== change.doc.data().user_id)

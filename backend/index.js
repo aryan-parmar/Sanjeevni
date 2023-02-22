@@ -20,13 +20,13 @@ app.use(function (req, res, next) {
   next();
 });
 app.use(cors({
-    origin: ['http://192.168.7.242:3000', 'http://192.168.7.242:3001'],
+    origin: ['http://192.168.1.8:3000', 'http://192.168.1.8:3001'],
     credentials: true
 }))
 // const allowedOrigins = [
 //   "http:localhost:3000",
 //   "http:localhost:3001",
-// ];
+// ];q   
 // app.use(
 //   cors({
 //     origin: (origin, callback) => {
@@ -49,5 +49,5 @@ app.use('/api/get/', get);
 app.use('/api/chat/', chat);
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://192.168.7.242:${port}`);
+  console.log(`Example app listening at http://192.168.1.8:${port}`);
 });

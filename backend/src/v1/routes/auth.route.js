@@ -6,9 +6,9 @@ const authCheck = require("../middleware/authCheck");
 const User = require("../../models/User.model");
 const Form = require("../../models/Form.model");
 
-const accountSid = "AC3115f74b66c8909ca220dd6c60a4a30f";
+const accountSid = "AC65523e31bbdbe4cb97d58c1a97944705";
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const verifySid = "VA46157dd57ee306ffb21e0a351bf06622";
+const verifySid = "VAe077af1f7bf39f70809e510d95730a89";
 const client = require("twilio")(accountSid, authToken);
 
 router.post("/signup", async (req, res, next) => {
