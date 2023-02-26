@@ -1,1 +1,0 @@
-## Sanjeevni - A Medical Assistant
