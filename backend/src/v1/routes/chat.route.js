@@ -7,7 +7,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-router.post("/chatbot", authCheck, async (req, res, next) => {
+router.post("/chatbot", async (req, res, next) => {
   let { msg } = req.body;
   if (!msg) return res.status(400).json({ err: "Message not found" });
   try{
